@@ -371,6 +371,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 handleDelete();
                 return;
             }
+            if (key === 32) {
+                window.alert("Dont use spaces you stinky cheater!");
+                return;
+            }
             
             updateGuessedWords(character);
         });
