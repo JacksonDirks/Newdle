@@ -43,21 +43,38 @@ document.addEventListener("DOMContentLoaded", () => {
     
     function initLocalStorage() {
         const storedCurrentWordIndex = window.localStorage.getItem('currentWordIndex');
-        const taskCreatedAt = window.localStorage.getItem('taskCreatedAt');
+        const taskCreatedAtDay = window.localStorage.getItem('taskCreatedAtDay');
+        const taskCreatedAtMonth = window.localStorage.getItem('taskCreatedAtMonth');
+        const taskCreatedAtYear = window.localStorage.getItem('taskCreatedAtYear');
         
         const date = new Date();
         let day = date.getDate();
         let month = date.getMonth() + 1;
         let year = date.getFullYear();
-        let thatDate = [year, month, day];
 
         if (!storedCurrentWordIndex) {
             window.localStorage.setItem('currentWordIndex', currentWordIndex);
-            window.localStorage.setItem('taskCreatedAt', thatDate.join(""));
-        } else if (Number(thatDate.join("")) > Number(taskCreatedAt)) {
+            window.localStorage.setItem('taskCreatedAtDay', day);
+            window.localStorage.setItem('taskCreatedAtMonth', month);
+            window.localStorage.setItem('taskCreatedAtYear', year);
+        } else if (year > Number(taskCreatedAtYear)) {
             window.localStorage.clear();
             initLocalStorage();
-        } else {
+        } else if (year <= Number(taskCreatedAtYear)) {
+            if (month > Number(taskCreatedAtMonth)) {
+                window.localStorage.clear();
+                initLocalStorage();
+            } else if (month <= Number(taskCreatedAtMonth)) {
+                if (day > Number(taskCreatedAtDay)) {
+                    window.localStorage.clear();
+                    initLocalStorage();
+                } else if (day <= Number(taskCreatedAtDay)) {
+                    currentWordIndex = Number(storedCurrentWordIndex);
+                    currentWord = words[currentWordIndex];
+                }
+            }
+        }
+        else {
             currentWordIndex = Number(storedCurrentWordIndex);
             currentWord = words[currentWordIndex];
         }
