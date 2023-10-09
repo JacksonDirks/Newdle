@@ -44,12 +44,19 @@ document.addEventListener("DOMContentLoaded", () => {
     function initLocalStorage() {
         const storedCurrentWordIndex = window.localStorage.getItem('currentWordIndex');
         const taskCreatedAt = window.localStorage.getItem('taskCreatedAt');
-        const timePassed = Date.now() - Number(taskCreatedAt);
+        
+        const date = new Date();
+        let day = date.getDate();
+        let month = date.getMonth() + 1;
+        let year = date.getFullYear();
+        let thatDate = [year, month, day];
+
         if (!storedCurrentWordIndex) {
             window.localStorage.setItem('currentWordIndex', currentWordIndex);
-            window.localStorage.setItem('taskCreatedAt', Date.now());
-        } else if (timePassed > 24 * 60 * 60 * 1000) {
+            window.localStorage.setItem('taskCreatedAt', thatDate.join(""));
+        } else if (Number(thatDate.join("")) > Number(taskCreatedAt)) {
             window.localStorage.clear();
+            initLocalStorage();
         } else {
             currentWordIndex = Number(storedCurrentWordIndex);
             currentWord = words[currentWordIndex];
