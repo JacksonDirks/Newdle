@@ -240,6 +240,9 @@ document.addEventListener("DOMContentLoaded", () => {
          if (!res.ok) {
             throw Error();
          }
+        if (res.length < 5) {
+            throw Error();
+         }
         const firstLetterId = guessedWordCount * 5 + 1;
 
         window.localStorage.setItem('availableSpace', availableSpace);
