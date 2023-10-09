@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
      let currentWordIndex = currentDate - 19637;
     
 
-    const words = ["green", "white", "artsy", "clubs", "class", "music", "bands", "dance", "sport", "footy",
+    const words = ["green", "white", "clubs", "class", "music", "bands", "dance", "sport", "footy",
                     "lunch", "pride", "honor", "drama", "civic", "cheer", "youth", "learn", "faith", "field",
                     "honor", "quiet", "tutor", "unity", "visit", "lupin", "lemle", "jolly", "beard", "bivin",
                     "huber", "burns", "carey", "coats", "malis", "kelly", "davis", "ellis", "jones", "poole",
@@ -43,8 +43,13 @@ document.addEventListener("DOMContentLoaded", () => {
     
     function initLocalStorage() {
         const storedCurrentWordIndex = window.localStorage.getItem('currentWordIndex');
+        const taskCreatedAt = window.localStorage.getItem('taskCreatedAt');
+        const timePassed = Date.now() - Number(taskCreatedAt);
         if (!storedCurrentWordIndex) {
             window.localStorage.setItem('currentWordIndex', currentWordIndex);
+            window.localStorage.setItem('taskCreatedAt', Date.now());
+        } else if (timePassed > 24 * 60 * 60 * 1000) {
+            window.localStorage.clear();
         } else {
             currentWordIndex = Number(storedCurrentWordIndex);
             currentWord = words[currentWordIndex];
