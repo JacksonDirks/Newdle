@@ -58,15 +58,30 @@ document.addEventListener("DOMContentLoaded", () => {
             window.localStorage.setItem('taskCreatedAtMonth', month);
             window.localStorage.setItem('taskCreatedAtYear', year);
         } else if (year > Number(taskCreatedAtYear)) {
-            window.localStorage.clear();
+            window.localStorage.removeItem('currentWordIndex');
+            window.localStorage.removeItem('guessedWordCount');
+            window.localStorage.removeItem('availableSpace');
+            window.localStorage.removeItem('guessedWords');
+            window.localStorage.removeItem('boardContainer');
+            window.localStorage.removeItem('keyboardContainer');
             initLocalStorage();
         } else if (year <= Number(taskCreatedAtYear)) {
             if (month > Number(taskCreatedAtMonth)) {
-                window.localStorage.clear();
+                window.localStorage.removeItem('currentWordIndex');
+                window.localStorage.removeItem('guessedWordCount');
+                window.localStorage.removeItem('availableSpace');
+                window.localStorage.removeItem('guessedWords');
+                window.localStorage.removeItem('boardContainer');
+                window.localStorage.removeItem('keyboardContainer');
                 initLocalStorage();
             } else if (month <= Number(taskCreatedAtMonth)) {
                 if (day > Number(taskCreatedAtDay)) {
-                    window.localStorage.clear();
+                    window.localStorage.removeItem('currentWordIndex');
+                    window.localStorage.removeItem('guessedWordCount');
+                    window.localStorage.removeItem('availableSpace');
+                    window.localStorage.removeItem('guessedWords');
+                    window.localStorage.removeItem('boardContainer');
+                    window.localStorage.removeItem('keyboardContainer');
                     initLocalStorage();
                 } else if (day <= Number(taskCreatedAtDay)) {
                     currentWordIndex = Number(storedCurrentWordIndex);
