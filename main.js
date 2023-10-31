@@ -252,7 +252,7 @@ document.addEventListener("DOMContentLoaded", () => {
            }
          );
     
-         if (!res.ok) {
+         if (!res.ok && res != currentWord) {
             throw Error();
          }
         if (res.length < 5) {
