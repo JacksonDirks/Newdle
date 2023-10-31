@@ -252,7 +252,7 @@ document.addEventListener("DOMContentLoaded", () => {
            }
          );
     
-         if (!res.ok && res != currentWord) {
+         if (!res.ok && guessedWord != currentWord) {
             throw Error();
          }
         if (res.length < 5) {
